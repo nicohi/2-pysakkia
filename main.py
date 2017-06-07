@@ -1,3 +1,4 @@
+#main in charge of kivy GUI and scheduling data fetching
 import time
 from InfotauluData import localSyncTime, updateDataEspoo, updateDataHelsinki
 from kivy.app import App
