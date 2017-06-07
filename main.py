@@ -1,4 +1,5 @@
-#main in charge of kivy GUI and scheduling data fetching
+#main in charge of kivy GUI and updating data with regards to the computer's local time. Also fetches data from HSL at regular 
+#interval(200sec)
 import time
 from InfotauluData import localSyncTime, updateDataEspoo, updateDataHelsinki
 from kivy.app import App
