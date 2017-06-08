@@ -43,18 +43,18 @@ class OverLayout(FloatLayout):
         self.canvas.add(Rectangle(source=foreground, pos=self.pos, size=setScreenResolution))
 
         self.espooTopBar = Label(markup=True,
-                                     text='[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]', # Orbitron-Medium
+                                     text='[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]',
                                      font_size=destinationFontSize,
                                      pos_hint={'x':0, 'y':0.45})
 
         self.clock = Label(markup=True,
-                           text='[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]', # Orbitron-Regular
+                           text='[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]',
                            size_hint=(0.2, 0.1), pos_hint={'x':0, 'y':0.9},
                            font_size=clockFontSize)
 
 
         self.helsinkiTopBar = Label(markup=True,
-                                     text='[color=f0dec0][font='+fontOrbitronMed+']HELSINGIN SUUNTA     [/font][/color]', # Orbitron-Medium
+                                     text='[color=f0dec0][font='+fontOrbitronMed+']HELSINGIN SUUNTA     [/font][/color]',
                                      font_size=destinationFontSize,
                                      pos_hint={'x':0, 'y':0.45})
 
@@ -84,7 +84,7 @@ class OverLayout(FloatLayout):
         else:
             self.busBoxes.localUpdate()
             self.bg.source = background
-            self.clock.text = '[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]' # Orbitron-Regular
+            self.clock.text = '[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]'
             self.espooTopBar.text = '[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]'
             self.helsinkiTopBar.text = '[color=f0dec0][font='+fontOrbitronMed+']HELSINGIN SUUNTA     [/font][/color]'
 
@@ -128,7 +128,7 @@ class BusBoxLayout(BoxLayout):
                     mins = str(int(deltaT / 60) + 1)
                     txt = mins + " min " + data[1][x] + " " +  data[2][x]
                     entry = Label(markup=True,
-                                  text='[color=f44747][font='+fontOswaldReg+']'+txt+'[/font][/color]', # Oswald-Regular
+                                  text='[color=f44747][font='+fontOswaldReg+']'+txt+'[/font][/color]',
                                   font_size=busDataFont,
                                   text_size=(900, None),
                                   size_hint=(1.0, 0.15))
@@ -136,7 +136,7 @@ class BusBoxLayout(BoxLayout):
                 else:
                     txt = time.strftime("%H:%M", time.localtime(data[0][x])) + " " + data[1][x] + " " + data[2][x]
                     entry = Label(markup=True,
-                                  text='[color=f0dec0][font='+fontOswaldReg+']'+txt+'[/font][/color]', # Oswald-Regular
+                                  text='[color=f0dec0][font='+fontOswaldReg+']'+txt+'[/font][/color]',
                                   font_size=busDataFont,
                                   text_size=(900, None),
                                   size_hint=(1.0, 0.15))
