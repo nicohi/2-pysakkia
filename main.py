@@ -190,7 +190,7 @@ class InfotauluApp(App):
 
         overLayout = OverLayout()
         Clock.schedule_interval(overLayout.localUpdate, 1.0)
-        Clock.schedule_interval(overLayout.internetUpdate, 20.0)
+        Clock.schedule_interval(overLayout.internetUpdate, 200.0)
 
         return overLayout
 
