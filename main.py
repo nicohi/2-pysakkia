@@ -9,8 +9,6 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics.instructions import Canvas, CanvasBase
 from kivy.graphics import Rectangle
-
-
 from kivy.core.image import Image
 
 
@@ -21,27 +19,22 @@ background = Image('kesa2bv2.png').texture
 foreground = Image('grafiikka.png').texture
 errorBackground = Image('feelsErrorMan.png').texture
 
-#background = 'kesa2bv2.png'
-#foreground = 'grafiikka.png'
-#errorBackground = 'matriisi.gif' #feelsErrorMan.png
-
 destinationFontSize = '52sp'
 clockFontSize = '82sp'
 busDataFont = 100
 
 versionString = "v 2.1929584f TietixLabs™ Inc.©"
 
-fontOrbitronMed = 'Orbitron-Medium'
-fontOrbitronReg = 'Orbitron-Regular'
-fontOswaldReg = 'Oswald-Regular'
-fontError = 'klingon font'
+fontLarge = 'Orbitron-Medium'
+fontMed = 'Orbitron-Regular'
+fontSmall = 'Oswald-Regular'
 
 testingStartTime = time.time()
+
 
 class OverLayout(FloatLayout):
 
     def __init__(self, **kwargs):
-
         super(OverLayout, self).__init__(**kwargs)
 
         self.busBoxes = BusBoxLayout(pos_hint={'x':0, 'y':0})
@@ -51,21 +44,19 @@ class OverLayout(FloatLayout):
         self.canvas.add(Rectangle(texture=foreground, pos=self.pos, size=setScreenResolution)) #source
 
         self.espooTopBar = Label(markup=True,
-                                     text='[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]',
-                                     font_size=destinationFontSize,
-                                     pos_hint={'x':0, 'y':0.45})
+                                text='[color=f0dec0][font='+fontLarge+']ESPOON SUUNTA[/font][/color]',
+                                font_size=destinationFontSize,
+                                pos_hint={'x':0, 'y':0.45})
 
         self.clock = Label(markup=True,
-                           text='[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]',
+                           text='[color=f44747][font='+fontMed+']'+str(time.strftime("%H:%M"))+'[/font][/color]',
                            size_hint=(0.2, 0.1), pos_hint={'x':0, 'y':0.9},
                            font_size=clockFontSize)
 
-
         self.helsinkiTopBar = Label(markup=True,
-                                     text='[color=f0dec0][font='+fontOrbitronMed+']HELSINGIN SUUNTA     [/font][/color]',
+                                     text='[color=f0dec0][font='+fontLarge+']HELSINGIN SUUNTA     [/font][/color]',
                                      font_size=destinationFontSize,
                                      pos_hint={'x':0, 'y':0.45})
-
 
         self.add_widget(Label(markup=True,
                               text='[color=f0dec0]'+versionString+'[/color]',
@@ -85,22 +76,22 @@ class OverLayout(FloatLayout):
 
     def localUpdate(self, *args):
         if self.busBoxes.errorCheck():
-            self.clock.text = '[color=f44747][font='+fontOswaldReg+']ERROR[/font][/color]'
+            self.clock.text = '[color=f44747][font='+fontSmall+']ERROR[/font][/color]'
             self.bg.texture = errorBackground #source
-            self.espooTopBar.text = '[color=f44747][font='+fontOswaldReg+']ERROR[/font][/color]'
-            self.helsinkiTopBar.text = '[color=f44747][font='+fontOswaldReg+']ERROR[/font][/color]'
+            self.espooTopBar.text = '[color=f44747][font='+fontSmall+']ERROR[/font][/color]'
+            self.helsinkiTopBar.text = '[color=f44747][font='+fontSmall+']ERROR[/font][/color]'
+
         else:
             self.busBoxes.localUpdate()
             self.bg.texture = background #source
-            self.clock.text = '[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]'
-            self.espooTopBar.text = '[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]'
-            self.helsinkiTopBar.text = '[color=f0dec0][font='+fontOrbitronMed+']HELSINGIN SUUNTA     [/font][/color]'
+            self.clock.text = '[color=f44747][font='+fontMed+']'+str(time.strftime("%H:%M"))+'[/font][/color]'
+            self.espooTopBar.text = '[color=f0dec0][font='+fontLarge+']ESPOON SUUNTA[/font][/color]'
+            self.helsinkiTopBar.text = '[color=f0dec0][font='+fontLarge+']HELSINGIN SUUNTA     [/font][/color]'
 
 
 class BusBoxLayout(BoxLayout):
 
     def __init__(self, **kwargs):
-
         super(BusBoxLayout, self).__init__(**kwargs)
         self.espoo = []
         self.helsinki = []
@@ -109,7 +100,6 @@ class BusBoxLayout(BoxLayout):
 
 
     def getStack(self, dataIn):
-
         data = dataIn
         layout = StackLayout(orientation = 'tb-lr', padding=[110,160,0,0])
         currentTime = time.time()
@@ -136,7 +126,7 @@ class BusBoxLayout(BoxLayout):
                     mins = str(int(deltaT / 60) + 1)
                     txt = mins + " min " + data[1][x] + " " +  data[2][x]
                     entry = Label(markup=True,
-                                  text='[color=f44747][font='+fontOswaldReg+']'+txt+'[/font][/color]',
+                                  text='[color=f44747][font='+fontSmall+']'+txt+'[/font][/color]',
                                   font_size=busDataFont,
                                   text_size=(900, None),
                                   size_hint=(1.0, 0.15))
@@ -144,7 +134,7 @@ class BusBoxLayout(BoxLayout):
                 else:
                     txt = time.strftime("%H:%M", time.localtime(data[0][x])) + " " + data[1][x] + " " + data[2][x]
                     entry = Label(markup=True,
-                                  text='[color=f0dec0][font='+fontOswaldReg+']'+txt+'[/font][/color]',
+                                  text='[color=f0dec0][font='+fontSmall+']'+txt+'[/font][/color]',
                                   font_size=busDataFont,
                                   text_size=(900, None),
                                   size_hint=(1.0, 0.15))
@@ -157,7 +147,7 @@ class BusBoxLayout(BoxLayout):
 
         else:
             entry = Label(markup=True,
-                          text='[color=f44747][font='+fontOrbitronMed+']Contact nearest system administrator',
+                          text='[color=f44747][font='+fontSmall+']If the problem doesn\'t resolve itself within the hour, contact nearest system administrator',
                           font_size=75,
                           text_size=(900, None))
 
@@ -170,8 +160,8 @@ class BusBoxLayout(BoxLayout):
 
     def internetUpdate(self, *args):
         try:
-            if time.time() - testingStartTime <= 30:
-                raise ValueError("hello")
+            #if time.time() - testingStartTime <= 30:
+            #    raise ValueError("hello")
             self.espoo = localSyncTime(updateDataEspoo())
             self.helsinki = localSyncTime(updateDataHelsinki())
             BusBoxLayout.localUpdate(self)
@@ -179,23 +169,23 @@ class BusBoxLayout(BoxLayout):
         except:
             self.error = True
 
+
     def localUpdate(self, *args):
         self.clear_widgets()
         self.add_widget(BusBoxLayout.getStack(self, self.espoo))
         self.add_widget(BusBoxLayout.getStack(self, self.helsinki))
+
 
     def errorCheck(self, *args):
         return self.error
 
 
 class InfotauluApp(App):
-
     def __init__(self, **kwargs):
         super(InfotauluApp, self).__init__(**kwargs)
 
 
     def build(self):
-
         overLayout = OverLayout()
         Clock.schedule_interval(overLayout.localUpdate, 1.0)
         Clock.schedule_interval(overLayout.internetUpdate, 200.0)
