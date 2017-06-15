@@ -11,11 +11,19 @@ from kivy.graphics.instructions import Canvas, CanvasBase
 from kivy.graphics import Rectangle
 
 
+from kivy.core.image import Image
+
+
 setScreenResolution = (1920, 1200) # 1920, 1200 / 1360, 768
 fullScreenMode = True
-background = 'kesa2bv2.png'
-foreground = 'grafiikka.png'
-errorBackground = 'feelsErrorMan.png'
+
+background = Image('kesa2bv2.png').texture
+foreground = Image('grafiikka.png').texture
+errorBackground = Image('feelsErrorMan.png').texture
+
+#background = 'kesa2bv2.png'
+#foreground = 'grafiikka.png'
+#errorBackground = 'matriisi.gif' #feelsErrorMan.png
 
 destinationFontSize = '52sp'
 clockFontSize = '82sp'
@@ -38,9 +46,9 @@ class OverLayout(FloatLayout):
 
         self.busBoxes = BusBoxLayout(pos_hint={'x':0, 'y':0})
         self.topBar = BoxLayout(orientation='horizontal')
-        self.bg = Rectangle(source=background, pos=self.pos, size=setScreenResolution)
+        self.bg = Rectangle(texture=background, pos=self.pos, size=setScreenResolution) #source
         self.canvas.add(self.bg)
-        self.canvas.add(Rectangle(source=foreground, pos=self.pos, size=setScreenResolution))
+        self.canvas.add(Rectangle(texture=foreground, pos=self.pos, size=setScreenResolution)) #source
 
         self.espooTopBar = Label(markup=True,
                                      text='[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]',
@@ -78,12 +86,12 @@ class OverLayout(FloatLayout):
     def localUpdate(self, *args):
         if self.busBoxes.errorCheck():
             self.clock.text = '[color=f44747][font='+fontOswaldReg+']ERROR[/font][/color]'
-            self.bg.source = errorBackground
+            self.bg.texture = errorBackground #source
             self.espooTopBar.text = '[color=f44747][font='+fontOswaldReg+']ERROR[/font][/color]'
             self.helsinkiTopBar.text = '[color=f44747][font='+fontOswaldReg+']ERROR[/font][/color]'
         else:
             self.busBoxes.localUpdate()
-            self.bg.source = background
+            self.bg.texture = background #source
             self.clock.text = '[color=f44747][font='+fontOrbitronReg+']'+str(time.strftime("%H:%M"))+'[/font][/color]'
             self.espooTopBar.text = '[color=f0dec0][font='+fontOrbitronMed+']ESPOON SUUNTA[/font][/color]'
             self.helsinkiTopBar.text = '[color=f0dec0][font='+fontOrbitronMed+']HELSINGIN SUUNTA     [/font][/color]'
@@ -149,7 +157,7 @@ class BusBoxLayout(BoxLayout):
 
         else:
             entry = Label(markup=True,
-                          text='[color=f44747][font='+fontError+']Temporal anomaly detected in the onboard networking channel. Please realign the neutronium coolant solution or contact the nearest alignment technical officer.[/font][/color]',
+                          text='[color=f44747][font='+fontOrbitronMed+']Contact nearest system administrator',
                           font_size=75,
                           text_size=(900, None))
 
