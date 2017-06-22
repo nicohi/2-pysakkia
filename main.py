@@ -167,6 +167,7 @@ class BusBoxLayout(BoxLayout):
             BusBoxLayout.localUpdate(self)
             self.error = False
         except:
+            print ('error happened at '+str(time.ctime))
             self.error = True
 
 
