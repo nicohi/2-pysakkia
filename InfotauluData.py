@@ -32,7 +32,7 @@ def updateDataEspoo():
 
         if isEmpty(espoo):
             time.sleep(2)
-            print('espoo returned empty')
+            print('espoo returned empty at '+str(time.ctime()))
             continue
         break
 
@@ -50,7 +50,7 @@ def updateDataHelsinki():
 
         if isEmpty(helsinki):
             time.sleep(2)
-            print('helsinki returned empty')
+            print('helsinki returned empty at '+str(time.ctime()))
             continue
         break
 
